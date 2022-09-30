@@ -39,5 +39,25 @@ const fetchCoordsByIp = function(ip, callback) {
   });
 };
 
-module.exports = { fetchMyIP, fetchCoordsByIp };
+//Ensure that this function works with call correctly.
+//Implement the coordinates of your locations from what is being in the call into the url in the appropriate spaces.
+//This file already returned the needed things in a JSON object.
+//Next let's get the posting of the parsed body to only return array of response and duration times.
+const fetchISSFlyOverTimes = function(coords, callback) {
+  request(`https://iss-flyover.herokuapp.com/json/?lat=${coords.latitude}&lon=${coords.longitude}`, (error, response, body) => {
+    if (error) {
+      callback(error, null);
+    }
+    let statusCode = response.statusCode;
+    if (statusCode !== 200) {
+      callback("The status code is not 200", null);
+    }
+    else {
+      let flyoverTimes = JSON.parse(body);
+      callback(null, flyoverTimes.response);
+    }
+  });
+};
+
+module.exports = { fetchMyIP, fetchCoordsByIp, fetchISSFlyOverTimes };
 
