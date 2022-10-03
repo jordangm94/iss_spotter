@@ -1,4 +1,4 @@
-/**
+/** This assignment aims to illustrate the callback hell! 
  * Makes a single API request to retrieve the user's IP address.
  * Input:
  *   - A callback (to pass back an error or the IP string)
